@@ -1,17 +1,17 @@
 import { ServiceForm } from "./ServiceForm.js"
-import { Requests } from "./Requests.js"
+import { Reservations } from "./Reservations.js"
 
 
 export const ClownShow = () => {
     return `
-        <h1>Maude and Merle's Sink Repair</h1>
+        <h1>Buttons and Lollipop's Clown Show!</h1>
         <section class="serviceForm">
             ${ ServiceForm() }
         </section>
-
-        <section class="serviceRequests">
-            <h2>Service Requests</h2>
-            ${ Requests() }
+        <section class="listReservations">
+        <h2>Reservations</h2>
+        
+        ${ Reservations() }
         </section>
     `
 }
