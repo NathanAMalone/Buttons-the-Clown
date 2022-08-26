@@ -2,10 +2,21 @@ import { getReservations, deleteReservation, getClowns, saveCompletion } from ".
 
 export const Reservations = () => {
     const reservations = getReservations()
+    const dateSortReservation = reservations.sort((a, b) => {
+        let stringDateA = a.reservationDate,
+            stringDateB = b.reservationDate;
+        if (stringDateA < stringDateB) {
+            return -1;
+        }
+        if (stringDateA > stringDateB) {
+            return 1;
+        }
+        return 0;
+    })
     const clowns = getClowns()
 
     let html = "<ul class='partyReservations'>"
-        const partyReservations = reservations.map(
+        const partyReservations = dateSortReservation.map(
             (reservation) => {
                 return `<li class='parties'>
                     Address: ${reservation.address}<br>Date: ${reservation.reservationDate}<br> Child's Name: ${reservation.childName}
@@ -47,8 +58,8 @@ document.addEventListener(
     (event) => {
         if (event.target.id === "clowns") {
             const [reservationId, clownId] = event.target.value.split("--")
-            const timestamp = Date.now()
-            
+            const timestamp = new Date().toLocaleDateString();
+
             const completion = {
                 reservationId: parseInt(reservationId),
                 clownId: parseInt(clownId),
